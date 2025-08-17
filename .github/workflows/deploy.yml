@@ -3,7 +3,7 @@ name: Deploy FastAPI App
 on:
   push:
     branches:
-      - main  # Runs on push to main branch
+      - main
 
 jobs:
   build-and-push-docker:
@@ -24,9 +24,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set lowercase REPO
+        id: repo
+        run: echo "REPO=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}/fastapi-app:latest
+          tags: ghcr.io/${{ env.REPO }}/fastapi-app:latest
