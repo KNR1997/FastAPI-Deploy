@@ -20,16 +20,17 @@ except ImportError:
 #     yield
 #     await Tortoise.close_connections()
 
+
 def create_app() -> FastAPI:
     app = FastAPI(
-        # title='FastAPI UV Starter',
-        # description=settings.APP_DESCRIPTION,
-        # version=settings.VERSION,
-        # openapi_url="/openapi.json",
-        # middleware=make_middlewares(),
+        title='FastAPI UV Starter',
+        description=settings.APP_DESCRIPTION,
+        version=settings.VERSION,
+        openapi_url="/openapi.json",
+        middleware=make_middlewares(),
         # lifespan=lifespan,
     )
-    # register_exceptions(app)
+    register_exceptions(app)
     return app
 
 
