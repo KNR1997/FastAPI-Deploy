@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 class Settings:
     DB_HOST = os.getenv("DB_HOST", "localhost")
     DB_PORT = os.getenv("DB_PORT", "3306")
@@ -33,6 +32,7 @@ class Settings:
         "use_tz": False,
         "timezone": "UTC",
     }
+    DATETIME_FORMAT: str = "%Y-%m-%d %H:%M:%S"
 
 
 settings = Settings()

@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from app.database import init_db, close_db
-from app.models import User, Todo
 
 
 @asynccontextmanager
@@ -19,7 +18,7 @@ async def read_root():
     return {"message": "Hello, Tortoise ORM with generate_schemas!"}
 
 
-@app.post("/users/")
-async def create_user(name: str, email: str):
-    user = await User.create(name=name, email=email)
-    return {"id": user.id, "name": user.name, "email": user.email}
+# @app.post("/subjects/")
+# async def create_subject(name: str, email: str):
+#     user = await User.create(name=name, email=email)
+#     return {"id": user.id, "name": user.name, "email": user.email}
