@@ -14,11 +14,11 @@ try:
 except ImportError:
     raise SettingNotFound("Can not import settings")
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    await init_data()
-    yield
-    await Tortoise.close_connections()
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     await init_data()
+#     yield
+#     await Tortoise.close_connections()
 
 def create_app() -> FastAPI:
     app = FastAPI(
@@ -27,7 +27,7 @@ def create_app() -> FastAPI:
         version=settings.VERSION,
         openapi_url="/openapi.json",
         middleware=make_middlewares(),
-        lifespan=lifespan,
+        # lifespan=lifespan,
     )
     register_exceptions(app)
     return app
