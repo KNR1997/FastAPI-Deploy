@@ -1,31 +1,19 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship
-
-from .database import Base
+from tortoise import fields
+from tortoise.models import Model
 
 
-class User(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255), index=True)
-    email = Column(String(255), unique=True, index=True)
-    todos = relationship("Todo", back_populates="owner")
-    is_active = Column(Boolean, default=False)
+class User(Model):
+    id = fields.IntField(pk=True)
+    name = fields.CharField(max_length=255)
+    email = fields.CharField(max_length=255, unique=True)
+    is_active = fields.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
 
 
-class Todo(Base):
-    __tablename__ = "todos"
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String(255), index=True)
-    description = Column(String(255), index=True)
-    owner_id = Column(Integer, ForeignKey("users.id"))
-
-    owner = relationship("User", back_populates="todos")
-
-
-class Subject(Base):
-    __tablename__ = "subjects"
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255), index=True)
-    code = Column(String(255), unique=True, index=True)
-    is_active = Column(Boolean, default=False)
+class Todo(Model):
+    id = fields.IntField(pk=True)
+    title = fields.CharField(max_length=255)
+    description = fields.TextField(null=True)
+    owner = fields.ForeignKeyField("models.User", related_name="todos")

@@ -1,12 +1,9 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
+from tortoise import Tortoise
+from app.config import settings
 
-load_dotenv()
-import os
-DB_URL = os.getenv("DB_URL")
-engine = create_engine(DB_URL,echo=True)
-SessionLocal = sessionmaker(autocommit=False,autoflush=False, bind=engine)
+async def init_db():
+    await Tortoise.init(config=settings.TORTOISE_ORM)
+    await Tortoise.generate_schemas(safe=True)  # 👈 auto-creates tables if missing
 
-Base = declarative_base()
+async def close_db():
+    await Tortoise.close_connections()
