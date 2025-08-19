@@ -16,7 +16,7 @@ except ImportError:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await init_data()
+    # await init_data()
     yield
     await Tortoise.close_connections()
 

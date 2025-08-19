@@ -94,4 +94,4 @@ async def init_data():
     # await init_menus()
     # await init_apis()
     # await init_roles()
-    ...
+    pass
