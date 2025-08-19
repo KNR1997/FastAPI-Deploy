@@ -15,5 +15,5 @@ class User(Model):
 class Todo(Model):
     id = fields.IntField(pk=True)
     title = fields.TextField()
-    description = fields.TextField(null=True)
+    description = fields.BooleanField(default=True)
     owner = fields.ForeignKeyField("models.User", related_name="todos")
