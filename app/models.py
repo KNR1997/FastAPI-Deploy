@@ -21,3 +21,11 @@ class Todo(Base):
     owner_id = Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="todos")
+
+
+class Subject(Base):
+    __tablename__ = "subjects"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(255), index=True)
+    code = Column(String(255), unique=True, index=True)
+    is_active = Column(Boolean, default=False)
