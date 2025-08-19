@@ -89,8 +89,9 @@ def register_exceptions(app: FastAPI):
     # app.add_exception_handler(DuplicateUserException, DuplicateUserHandle)
 
 async def init_data():
-    await init_db()
+    # await init_db()
     # await init_superuser()
     # await init_menus()
     # await init_apis()
     # await init_roles()
+    ...
